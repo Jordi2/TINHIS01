@@ -34,6 +34,8 @@ int averageOf = 25;                                 //take average of *averageOf
 int averageDistanceA = 0; int averageDistanceB = 0; //average of measurments
 int range = 25;                                     //allowed distance between sensors before detecting people
 
+int people = 0;                                     //the number of people that have passed the sensor
+
 void setup()
 {
   Serial.begin(9600); //Enable the serial comunication
@@ -63,9 +65,11 @@ void loop()
     // Are people walking by the sensors?
     if(averageDistanceA < averageDistanceB-range){
       Serial.println("-------------Left-------------");
+      people++;
     } 
     if(averageDistanceA > averageDistanceB+range){
       Serial.println("-------------Right-------------");
+      people++;
     }
   }
 }
