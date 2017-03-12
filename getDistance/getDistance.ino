@@ -29,9 +29,9 @@ int sensorType = GP2Y0A02YK0F;//the sensor you use
 SharpIR sensorA(sensorType, A0);SharpIR sensorB(sensorType, A1);
 
 int count = 0;                                      //counter
-int totalDistanceA = 0;int totalDistanceB = 0;      //sum of measurments
+int totalDistanceA = 0;int totalDistanceB = 0;      //sum of measurements
 int averageOf = 25;                                 //take average of *averageOf* distances
-int averageDistanceA = 0; int averageDistanceB = 0; //average of measurments
+int averageDistanceA = 0; int averageDistanceB = 0; //average of measurements
 int range = 25;                                     //allowed distance between sensors before detecting people
 
 int people = 1;                                     //the number of people that have passed the sensor
@@ -61,16 +61,16 @@ void setup()
   pinMode(dataPin, OUTPUT);//SER
   
   dataArray[0] = 0; //uit 
-  dataArray[1] = 144; //1=b+c=16+128 
-  dataArray[2] = 91; //2=abged=8+16+64+1+2=91 
-  dataArray[3] = 218; //3=abcdg=8+16+128+2+64=218 
-  dataArray[4] = 240; //4=fgbc=32+16+64+128=240 
-  dataArray[5] = 234; //5 
-  dataArray[6] = 235; //6 
-  dataArray[7] = 152; //7 
-  dataArray[8] = 251; //8 
-  dataArray[9] = 248; //9 
-  dataArray[10] = 187; // 
+  dataArray[1] = 72; //1=b+c=8+64 
+  dataArray[2] = 47; //2=abged=4+8+32+1+2=47 
+  dataArray[3] = 110; //3=abcdg=4+8+64+2+32=110 
+  dataArray[4] = 120; //4=fgbc=16+32+8+64=120 
+  dataArray[5] = 118; //5 
+  dataArray[6] = 115; //6 
+  dataArray[7] = 92; //7 
+  dataArray[8] = 255; //8 
+  dataArray[9] = 254; //9 
+  dataArray[10] = 0; // 
   
   //pins for controlling digit selection 
   pinMode(dig1, OUTPUT); 
@@ -87,7 +87,8 @@ void setup()
 
 void loop()
 {
-  int distanceA = sensorA.getDistance(); //Calculate the distance in centimeters and store the value in a variable
+  //Calculate the distance in centimeters and store the value in a variable
+  int distanceA = sensorA.getDistance();
   int distanceB = sensorB.getDistance(); 
   if(count < averageOf){
     //count multiple measurements together
@@ -109,7 +110,7 @@ void loop()
     // Are people walking by the sensors?
     if(averageDistanceA < averageDistanceB-range){
       Serial.println("-------------Left-------------");
-      people++;
+      people--;
     } 
     if(averageDistanceA > averageDistanceB+range){
       Serial.println("-------------Right-------------");
